@@ -1,10 +1,10 @@
 import pandas as pd
 import pycountry
 
-from readers.models import StackOverflow, ProgrammingLanguageResponse
+from readers.models import StackOverflowResponse, ProgrammingLanguageResponse
 
 
-class StackOverflowReader:
+class StackOverflowResponseReader:
     def __init__(self, csv_file):
         self.csv = csv_file
 
@@ -37,7 +37,7 @@ class StackOverflowReader:
                 country = pycountry.countries.get(name=row["Country"])
                 age_range = self.age_range(row['Age1stCode'])
                 if country and age_range:
-                    survey_response = StackOverflow.objects.create(country_name=country.name.lower(),
+                    survey_response = StackOverflowResponse.objects.create(country_name=country.name.lower(),
                                                                    min_age_first_code=age_range['min'],
                                                                    max_age_first_code=age_range['max'])
                     if type(row["LanguageHaveWorkedWith"]) is str:

@@ -1,16 +1,16 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from readers.gdp_reader import GDPReader
-from readers.models import StackOverflow, GDP
-from readers.stack_overflow_reader import StackOverflowReader
+from readers.gross_domestic_response_reader import GrossDomesticProductReader
+from readers.models import GrossDomesticProduct, StackOverflowResponse
+from readers.stack_overflow_response_reader import StackOverflowResponseReader
 
 
 class Command(BaseCommand):
     help = 'Load db with stackoverflow and gdp'
 
     def handle(self, *args, **options):
-        GDP.objects.all().delete()
-        GDPReader("readers/files/tec00001_page_spreadsheet.xlsx").read(2021)
+        GrossDomesticProduct.objects.all().delete()
+        GrossDomesticProductReader("readers/files/tec00001_page_spreadsheet.xlsx").read(2021)
 
-        StackOverflow.objects.all().delete()
-        StackOverflowReader("readers/files/survey_results_public.csv").read(2021)
+        StackOverflowResponse.objects.all().delete()
+        StackOverflowResponseReader("readers/files/survey_results_public.csv").read()

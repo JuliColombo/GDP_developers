@@ -1,15 +1,15 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from readers.gdp_reader import GDPReader
-from readers.stack_overflow_reader import StackOverflowReader
+from readers.gross_domestic_response_reader import GrossDomesticProductReader
+from readers.stack_overflow_response_reader import StackOverflowResponseReader
 
 
-class CountryGDPYoungestAgeAPITestCase(TestCase):
+class CountryGrossDomesticProductYoungestAgeAPITestCase(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
-        GDPReader("readers/tests/files/test_gdp.xlsx").read(2021)
-        StackOverflowReader("readers/tests/files/test_stackoverflow.csv").read()
+        GrossDomesticProductReader("readers/tests/files/test_gdp.xlsx").read(2021)
+        StackOverflowResponseReader("readers/tests/files/test_stackoverflow.csv").read()
 
     def test_non_european_country_returns_400_response(self):
         response = self.client.post('/processors/gdp_youngest_age', data={'iso_code': 'AF'}, format='json')

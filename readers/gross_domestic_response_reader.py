@@ -1,10 +1,10 @@
 import pandas as pd
 import pycountry
 
-from readers.models import GDP
+from readers.models import GrossDomesticProduct
 
 
-class GDPReader:
+class GrossDomesticProductReader:
     def __init__(self, xlsx_file):
         self.xslx = xlsx_file
 
@@ -15,6 +15,6 @@ class GDPReader:
             try:
                 country = pycountry.countries.get(name=row["TIME"])
                 if country:
-                    GDP.objects.create(country_name=country.name.lower(), country_iso=country.alpha_2, gross_domestic_product=int(row[str(year)]))
+                    GrossDomesticProduct.objects.create(country_name=country.name.lower(), country_iso=country.alpha_2, gross_domestic_product=int(row[str(year)]))
             except Exception as e:
                 print(e)
