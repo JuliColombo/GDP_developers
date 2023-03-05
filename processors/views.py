@@ -27,9 +27,8 @@ class CountryGDPYoungestAge(APIView):
             case 65:
                 return 'Older than 64 years'
 
-    def post(self, request):
-        country_iso_code = request.data['iso_code']
-        gdp = GrossDomesticProduct.objects.filter(country_iso=country_iso_code.upper()).first()
+    def get(self, request, iso_code):
+        gdp = GrossDomesticProduct.objects.filter(country_iso=iso_code.upper()).first()
         if not gdp:
             return HttpResponseBadRequest()
         min_age = StackOverflowResponse.objects.filter(country_name=gdp.country_name).aggregate(min_age_total=Min('min_age_first_code'))['min_age_total']

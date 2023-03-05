@@ -20,7 +20,7 @@ _*Since 2022's GDP was incomplete, 2021 information was used_
 `./manage.py runserver`
 
 ## Endpoint example
-`GET http://localhost:8000/processors/gdp_youngest_age?iso_code=BE`
+`GET http://localhost:8000/processors/gdp_youngest_age/BE/`
 
 ----
 ## Project
