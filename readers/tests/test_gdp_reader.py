@@ -6,7 +6,7 @@ from readers.models import GDP
 
 class GDPReaderTestCase(TransactionTestCase):
     def setUp(self) -> None:
-        GDPReader("readers/tests/files/test_gdp.xlsx").read()
+        GDPReader("readers/tests/files/test_gdp.xlsx").read(2021)
 
     def test_belgium_gdp_created(self):
         gdp = GDP.objects.first()

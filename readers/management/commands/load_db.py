@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         GDP.objects.all().delete()
-        GDPReader("readers/files/tec00001_page_spreadsheet.xlsx").read()
+        GDPReader("readers/files/tec00001_page_spreadsheet.xlsx").read(2021)
 
         StackOverflow.objects.all().delete()
-        StackOverflowReader("readers/files/survey_results_public.csv").read()
+        StackOverflowReader("readers/files/survey_results_public.csv").read(2021)

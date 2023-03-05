@@ -1,7 +1,7 @@
 import pandas as pd
 import pycountry
 
-from readers.models import StackOverflow, GDP, ProgrammingLanguageResponse
+from readers.models import StackOverflow, ProgrammingLanguageResponse
 
 
 class StackOverflowReader:
@@ -37,11 +37,9 @@ class StackOverflowReader:
                 country = pycountry.countries.get(name=row["Country"])
                 age_range = self.age_range(row['Age1stCode'])
                 if country and age_range:
-                    gdp = GDP.objects.filter(country_name=country.name.lower()).first()
-                    survey_response = StackOverflow.objects.create(gdp=gdp,
-                                                 country_name=country.name.lower(),
-                                                 min_age_first_code=age_range['min'],
-                                                 max_age_first_code=age_range['max'])
+                    survey_response = StackOverflow.objects.create(country_name=country.name.lower(),
+                                                                   min_age_first_code=age_range['min'],
+                                                                   max_age_first_code=age_range['max'])
                     if type(row["LanguageHaveWorkedWith"]) is str:
                         for language in row["LanguageHaveWorkedWith"].split(";"):
                             ProgrammingLanguageResponse.objects.create(name=language, survey_response=survey_response)

@@ -8,7 +8,7 @@ from readers.stack_overflow_reader import StackOverflowReader
 class CountryGDPYoungestAgeAPITestCase(TestCase):
     def setUp(self) -> None:
         self.client = APIClient()
-        GDPReader("readers/tests/files/test_gdp.xlsx").read()
+        GDPReader("readers/tests/files/test_gdp.xlsx").read(2021)
         StackOverflowReader("readers/tests/files/test_stackoverflow.csv").read()
 
     def test_non_european_country_returns_400_response(self):

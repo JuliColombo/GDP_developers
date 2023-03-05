@@ -8,13 +8,13 @@ class GDPReader:
     def __init__(self, xlsx_file):
         self.xslx = xlsx_file
 
-    def read(self):
+    def read(self, year):
         df = pd.read_excel(self.xslx, sheet_name="Sheet 1", skiprows=8)
 
-        for index, row in df[['TIME', '2021']].iterrows():
+        for index, row in df[['TIME', str(year)]].iterrows():
             try:
                 country = pycountry.countries.get(name=row["TIME"])
                 if country:
-                    GDP.objects.create(country_name=country.name.lower(), country_iso=country.alpha_2, gross_domestic_product=int(row['2021']))
+                    GDP.objects.create(country_name=country.name.lower(), country_iso=country.alpha_2, gross_domestic_product=int(row[str(year)]))
             except Exception as e:
                 print(e)
